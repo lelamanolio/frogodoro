@@ -12,18 +12,18 @@
       <li>Short Break Time -> minutes</li>
         <InputNumber :number="settings.shortBreakTime" :step="5" @number-change="val => updateSettings('shortBreakTime', val)" />
       <li>Long Break -> on/off</li>
-        <ToggleSwitch />
+        <ToggleSwitch :value="settings.longBreak" @toggle-change="val => updateSettings('longBreak', val)" />
       <li>Long Break Time -> minutes</li>
-        <InputNumber :number="settings.longBreakTime" :step="5" @number-change="val => updateSettings('longBreakTime', val)" />
+        <InputNumber :class="settings.longBreak === false ? 'c-number--disabled' : ''" :number="settings.longBreakTime" :step="5" @number-change="val => updateSettings('longBreakTime', val)" />
       <li>Sounds -> on/off</li>
-        <ToggleSwitch />
+        <ToggleSwitch :value="settings.sounds" @toggle-change="val => updateSettings('sounds', val)" />
       <li>Sounds > -> lofi / white noises</li>
         <ButtonGroup />
       <li>Sound volume -> slider (range input)</li>
       <li>Use system theme -> on/off</li>
-        <ToggleSwitch />
+        <ToggleSwitch :value="settings.useSystemTheme" @toggle-change="val => updateSettings('useSystemTheme', val)" />
       <li>Dark mode -> on/off</li>
-        <ToggleSwitch />
+        <ToggleSwitch :class="settings.useSystemTheme === true ? 'c-toggle--disabled' : ''" :value="settings.darkMode" @toggle-change="val => updateSettings('darkMode', val)" />
       <li>About -> developer, Heroicons, app version</li>
     </ul>
   </div>

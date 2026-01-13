@@ -1,107 +1,96 @@
 <template>
-  <div class="btn btn-rect" id="button-13">
-    <input type="checkbox" class="checkbox" />
-    <div class="knob">
+  <div class="c-toggle">
+    <input type="checkbox" class="c-toggle__checkbox" :checked="props.value" @change="e => emit('toggleChange', e.target.checked)" />
+    <div class="c-toggle__knob">
       <span></span>
     </div>
-    <div class="btn-bg"></div>
   </div>
 </template>
 
 <script setup>
+import { defineProps, defineEmits } from 'vue';
 
+const emit = defineEmits(['toggleChange']);
+const props = defineProps({
+  value: {
+    type: Boolean,
+  },
+});
 </script>
 
 <style lang="scss">
-.btn.btn-rect {
-  border-radius: 2px;
+.c-toggle {
+  border-radius: 12px;
+  position: relative;
+  width: 74px;
+  height: 36px;
+  overflow: hidden;
+  background-color: var(--background);
+  border: 1px solid var(--text-muted);
+  transition: border 0.1s linear, background-color 0.1s linear;
+
+  &:hover {
+    border: 1px solid var(--text);
+    background-color: color-mix(in srgb, var(--background) 99%, var(--text) 1%);
+  }
+
+  &.c-toggle--disabled {
+    cursor: not-allowed;
+    pointer-events: none;
+    opacity: 0.5;
+  }
 }
 
-.checkbox {
+.c-toggle__checkbox {
   position: relative;
   width: 100%;
   height: 100%;
-  padding: 0;
-  margin: 0;
   opacity: 0;
   cursor: pointer;
-  z-index: 3;
-}
-
-.knob {
   z-index: 2;
+
+  &:checked + .c-toggle__knob {
+    &:before {
+      left: 42px;
+      content: 'ON';
+    }
+
+    span {
+      left: 42px;
+    }
+  }
 }
 
-.btn-bg {
-  width: 100%;
-  background-color: #ebf7fc;
-  transition: 0.3s ease all;
-  z-index: 1;
-}
-
-.btn {
-  position: relative;
-  top: 50%;
-  width: 74px;
-  height: 36px;
-  margin: -20px auto 0 auto;
-  overflow: hidden;
-}
-
-.knob,
-.btn-bg {
+.c-toggle__knob {
   position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
+
+  &:before {
+    content: "OFF";
+    position: absolute;
+    width: calc(50% - 12px);
+    left: 6px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text);
+    font-size: 10px;
+    text-align: center;
+    z-index: 1;
+  }
 }
 
-#button-13 .knob:before,
-#button-13 .knob:after,
-#button-13 .knob span {
+.c-toggle__knob span {
   position: absolute;
-  top: 4px;
-  width: 20px;
-  height: 10px;
-  font-size: 10px;
-  font-weight: bold;
-  text-align: center;
-  line-height: 1;
-  padding: 9px 4px;
-  border-radius: 2px;
-  transition: 0.3s ease all;
-}
-
-#button-13 .knob:before,
-#button-13 .knob:after {
-  color: #4e4e4e;
-  z-index: 1;
-}
-
-#button-13 .knob:before {
-  content: "YES";
-  left: 4px;
-}
-
-#button-13 .knob:after {
-  content: "NO";
-  right: 4px;
-}
-
-#button-13 .knob span {
-  width: 25px;
-  left: 37px;
-  background-color: #03a9f4;
-  z-index: 2;
-}
-
-#button-13 .checkbox:checked + .knob span {
-  left: 4px;
-  background-color: #f44336;
-}
-
-#button-13 .checkbox:checked ~ .btn-bg {
-  background-color: #fcebeb;
+  top: 6px;
+  left: 6px;
+  bottom: 6px;
+  width: calc(50% - 12px);
+  color: var(--text);
+  background-color: var(--primary-color);
+  border-radius: 6px;
+  transition: 0.3s ease all, left 0.3s cubic-bezier(0.18, 0.89, 0.35, 1.15);
 }
 </style>

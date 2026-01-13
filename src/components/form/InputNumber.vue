@@ -65,6 +65,12 @@ const toggleFocusClass = (type) => {
   &.c-number--focus {
     border: 1.5px solid var(--primary-color);
   }
+
+  &.c-number--disabled {
+    cursor: not-allowed;
+    pointer-events: none;
+    opacity: 0.5;
+  }
 }
 
 .c-number__button {
