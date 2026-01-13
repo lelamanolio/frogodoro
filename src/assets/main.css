@@ -1,8 +1,37 @@
+:root {
+  --primary-color: #7FAF9B;
+  --accent-color: #B8D8C2;
+  --background-light: #F6F7F5;
+  --background-dark: #0F1412;
+  --text-primary-light: #2B3A34;
+  --text-muted-light: #6F857B;
+  --text-primary-dark: #E8ECEA;
+  --text-muted-dark: #9AA5A0;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: var(--background-dark);
+    --text: var(--text-primary-dark);
+    --text-muted: var(--text-muted-dark);
+  }
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    --background: var(--background-light);
+    --text: var(--text-primary-light);
+    --text-muted: var(--text-muted-light);
+  }
+}
+
 body {
   font-family: "Inter", sans-serif;
   font-optical-sizing: auto;
   font-weight: 500;
   font-style: normal;
+  color: var(--text);
+  background-color: var(--background);
 }
 
 .c-icon {

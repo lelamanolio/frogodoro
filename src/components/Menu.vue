@@ -2,10 +2,10 @@
   <nav class="c-menu">
     <ul class="c-menu__list">
       <li class="c-menu__item" @click="emit('menuClick', 'timer')">
-        <TimeIcon :size="32" />
+        <TimeIcon :size="32" :color="`var(--text)`" />
       </li>
       <li class="c-menu__item" @click="emit('menuClick', 'settings')">
-        <SettingsIcon :size="32" />
+        <SettingsIcon :size="32" :color="`var(--text)`" />
       </li>
     </ul>
   </nav>
@@ -25,7 +25,7 @@ const emit = defineEmits(['menuClick']);
   bottom: 0;
   width: 100%;
   padding: 24px;
-  background-color: #fff;
+  background-color: var(--background);
 }
 
 .c-menu__list {
