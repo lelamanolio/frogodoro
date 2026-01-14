@@ -26,6 +26,7 @@ const emit = defineEmits(['menuClick']);
   width: 100%;
   padding: 24px;
   background-color: var(--background);
+  z-index: 5;
 }
 
 .c-menu__list {

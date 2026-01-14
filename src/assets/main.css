@@ -25,7 +25,19 @@
   }
 }
 
-body {
+.is-light {
+  --background: var(--background-light);
+  --text: var(--text-primary-light);
+  --text-muted: var(--text-muted-light);
+}
+
+.is-dark {
+  --background: var(--background-dark);
+  --text: var(--text-primary-dark);
+  --text-muted: var(--text-muted-dark);
+}
+
+.c-main {
   font-family: "Inter", sans-serif;
   font-optical-sizing: auto;
   font-weight: 500;

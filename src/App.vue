@@ -1,23 +1,42 @@
 <template>
-  <header>
-    <h1>Frogodoro</h1>
-  </header>
+  <main class="c-main" :class="settings.darkMode === true && settings.useSystemTheme === false ? 'is-dark' : 'is-light'">
+    <header>
+      <h1>Frogodoro</h1>
+    </header>
 
-  <TimerView v-show="currentView === 'timer'"/>
-  <SettingsView v-show="currentView === 'settings'" />
+    <TimerView v-show="currentView === 'timer'"/>
+    <SettingsView v-show="currentView === 'settings'" />
 
-  <Menu @menu-click="updateView" />
+    <Menu @menu-click="updateView" />
+  </main>
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { ref, onBeforeMount, computed } from 'vue';
+import { useSettings } from './composables/useSettings.js'
 import Menu from '@/components/Menu.vue';
 import TimerView from './components/TimerView.vue';
 import SettingsView from './components/SettingsView.vue';
+
+const settingsStore = useSettings();
+
+const settings = computed(() => {
+  return settingsStore.settings.value
+});
 
 const currentView = ref('timer');
 
 const updateView = (view) => {
   currentView.value = view;
 }
+
+onBeforeMount(() => {
+  settingsStore.loadSettings()
+});
 </script>
+
+<style lang="scss">
+.c-main {
+  padding-bottom: 80px;
+}
+</style>
