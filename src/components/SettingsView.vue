@@ -43,6 +43,7 @@
       <li>Sounds > -> lofi / rain / fire</li>
       <ButtonGroup :group="'sounds'" :buttons="['lofi', 'rain', 'fire']" @sound-change="(val) => updateSettings('soundType', val)" :value="settings.soundType" />
       <li>Sound volume -> slider (range input)</li>
+      <VolumeSlider :value="settings.volume" @volume-change="(val) => updateSettings('volume', val)" />
       <li>Use system theme -> on/off</li>
       <ToggleSwitch
         :value="settings.useSystemTheme"
@@ -64,6 +65,7 @@ import { ref, onBeforeMount } from 'vue'
 import ButtonGroup from './form/ButtonGroup.vue'
 import InputNumber from './form/InputNumber.vue'
 import ToggleSwitch from './form/ToggleSwitch.vue'
+import VolumeSlider from './form/VolumeSlider.vue'
 
 const settings = ref({
   focusCount: 4,
