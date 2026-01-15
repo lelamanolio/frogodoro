@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <section>
     Timer
-  </div>
+  </section>
 </template>
 
 <script setup>

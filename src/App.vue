@@ -4,8 +4,8 @@
       <h1>Frogodoro</h1>
     </header>
 
-    <TimerView v-show="currentView === 'timer'"/>
-    <SettingsView v-show="currentView === 'settings'" />
+    <TimerView v-if="currentView === 'timer'"/>
+    <SettingsView v-if="currentView === 'settings'" />
 
     <Menu @menu-click="updateView" />
   </main>
