@@ -1,5 +1,5 @@
 <template>
-  <main class="c-main" :class="settings.darkMode === true && settings.useSystemTheme === false ? 'is-dark' : 'is-light'">
+  <main class="c-main" :class="{ 'is-dark' : settings.darkMode === true && settings.useSystemTheme === false, 'is-light' : settings.darkMode === false && settings.useSystemTheme === false }">
     <header>
       <h1>Frogodoro</h1>
     </header>
