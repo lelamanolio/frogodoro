@@ -36,7 +36,14 @@ onBeforeMount(() => {
 </script>
 
 <style lang="scss">
+#app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 .c-main {
+  flex-grow: 1;
   padding-bottom: 80px;
 }
 </style>
