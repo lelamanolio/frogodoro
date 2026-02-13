@@ -1,10 +1,7 @@
 <template>
   <nav class="c-menu">
     <ul class="c-menu__list">
-      <li class="c-menu__item" @click="emit('menuClick', 'timer')">
-        <TimeIcon :size="32" :color="`var(--text)`" />
-      </li>
-      <li class="c-menu__item" @click="emit('menuClick', 'settings')">
+      <li class="c-menu__item" v-if="props.view === 'timer'" @click="emit('menuClick', 'settings')">
         <SettingsIcon :size="32" :color="`var(--text)`" />
       </li>
     </ul>
@@ -13,17 +10,22 @@
 
 <script setup>
 import { defineEmits } from 'vue';
-import TimeIcon from '@/components/icons/TimeIcon.vue';
 import SettingsIcon from '@/components/icons/SettingsIcon.vue';
 
 const emit = defineEmits(['menuClick']);
+
+const props = defineProps({
+  view: {
+    type: String
+  }
+})
 </script>
 
 <style lang="scss">
 .c-menu {
   position: fixed;
   bottom: 0;
-  width: 100%;
+  right: 0;
   padding: 24px;
   background-color: var(--background);
   z-index: 5;

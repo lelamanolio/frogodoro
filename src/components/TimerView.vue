@@ -1,7 +1,7 @@
 <template>
   <section class="c-timer">
 
-    <p>{{ formatted }}</p>
+    <p class="c-timer__time">{{ formatted }}</p>
 
     <ul class="c-timer__dots">
       <template v-for="(focus, i) in settings.focusCount">
@@ -12,11 +12,6 @@
         </li>
       </template>
     </ul>
-
-    <div class="c-timer__image">
-      <img v-if="currentMode === 'focus'" src="../assets/focus_image.png" />
-      <img v-if="currentMode === 'break'" src="../assets/break_image.png" />
-    </div>
 
     <ul class="c-timer__list">
       <li class="c-timer__media" @click="start">
@@ -35,6 +30,11 @@
         <SkipIcon :size="32" :color="`var(--text)`" />
       </li>
     </ul>
+
+    <div class="c-timer__image">
+      <img v-if="currentMode === 'focus'" src="../assets/focus_image.png" />
+      <img v-if="currentMode === 'break'" src="../assets/break_image.png" />
+    </div>
   </section>
 </template>
 
@@ -60,17 +60,22 @@ onBeforeMount(() => {
 </script>
 
 <style lang="scss">
-.c-timer {
+.c-timer__time {
+  text-align: center;
+  font-size: 56px;
+  letter-spacing: 8px;
 }
 
 .c-timer__dots {
   display: flex;
   justify-content: center;
+  gap: 8px;
+  margin-bottom: 16px;
 }
 
 .c-timer__focus {
-  width: 28px;
-  height: 28px;
+  width: 24px;
+  height: 24px;
   border-radius: 100%;
   border: 2px solid var(--text);
   padding: 4px;
@@ -81,17 +86,21 @@ onBeforeMount(() => {
   justify-content: center;
 
   img {
-    max-height: 75dvh;
+    max-height: 58dvh;
   }
-}
-
-.c-timer__media {
 }
 
 .c-timer__list {
   display: flex;
   justify-content: center;
   gap: 32px;
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 24px;
+  background-color: var(--background);
+  z-index: 5;
 }
 
 .c-timer__media {

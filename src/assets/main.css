@@ -37,16 +37,21 @@
   --text-muted: var(--text-muted-dark);
 }
 
+body {
+  min-width: 700px;
+  min-height: 600px;
+  background-color: var(--background);
+}
+
 .c-main {
   font-family: "Inter", sans-serif;
   font-optical-sizing: auto;
   font-weight: 500;
   font-style: normal;
   color: var(--text);
-  background-color: var(--background);
 }
 
-.c-icon {
+.c-icon__svg {
   color: var(--icon-color);
   width: var(--icon-width);
 }

@@ -1,13 +1,10 @@
 <template>
   <main class="c-main" :class="{ 'is-dark' : settings.darkMode === true && settings.useSystemTheme === false, 'is-light' : settings.darkMode === false && settings.useSystemTheme === false }">
-    <header>
-      <h1>Frogodoro</h1>
-    </header>
-
     <TimerView v-if="currentView === 'timer'"/>
-    <SettingsView v-if="currentView === 'settings'" />
 
-    <Menu @menu-click="updateView" />
+    <SettingsView v-if="currentView === 'settings'" @back="updateView" />
+
+    <Menu :view="currentView" @menu-click="updateView" />
   </main>
 </template>
 
@@ -45,13 +42,27 @@ onBeforeMount(() => {
 .c-main {
   flex-grow: 1;
   padding-bottom: 80px;
+  padding-top: 32px;
 }
 
 .c-icon {
-  transition: 0.3s ease color;
-
   &:hover {
-    color: var(--primary-color);
+    .c-icon__svg,
+    .c-icon__text {
+      color: var(--primary-color);
+    }
   }
+}
+
+.c-icon__svg {
+  transition: 0.3s ease color;
+  margin: 0 auto;
+}
+
+.c-icon__text {
+  transition: 0.3s ease color;
+  text-transform: uppercase;
+  font-size: 10px;
+  letter-spacing: 2px;
 }
 </style>

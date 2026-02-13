@@ -1,5 +1,6 @@
 <template>
   <section class="c-settings">
+    <button @click="emit('back', 'timer')">Back</button>
     Settings
     <ul>
       <li>Focus Count -> number</li>
@@ -81,7 +82,7 @@
 </template>
 
 <script setup>
-import { onBeforeMount, computed, ref } from 'vue'
+import { onBeforeMount, computed, ref, defineEmits } from 'vue'
 import { useSettings } from '../composables/useSettings.js'
 import ButtonGroup from './form/ButtonGroup.vue'
 import InputNumber from './form/InputNumber.vue'
@@ -89,6 +90,8 @@ import ToggleSwitch from './form/ToggleSwitch.vue'
 import VolumeSlider from './form/VolumeSlider.vue'
 import InfoIcon from './icons/InfoIcon.vue'
 import CloseIcon from './icons/CloseIcon.vue'
+
+const emit = defineEmits(['back']);
 
 const settingsStore = useSettings();
 
