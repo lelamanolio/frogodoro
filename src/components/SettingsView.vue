@@ -1,76 +1,124 @@
 <template>
   <section class="c-settings">
-    <button @click="emit('back', 'timer')">Back</button>
-    Settings
-    <ul>
-      <li>Focus Count -> number</li>
-      <li>
-        <InputNumber
-          :number="settings.focusCount"
-          :step="1"
-          @number-change="(val) => settingsStore.updateSettings('focusCount', val)"
-        />
-      </li>
-      <li>Focus Time -> minutes</li>
-      <InputNumber
-        :number="settings.focusTime"
-        :step="5"
-        @number-change="(val) => settingsStore.updateSettings('focusTime', val)"
-      />
-      <li>Short Break Time -> minutes</li>
-      <InputNumber
-        :number="settings.shortBreakTime"
-        :step="5"
-        @number-change="(val) => settingsStore.updateSettings('shortBreakTime', val)"
-      />
-      <li>Long Break -> on/off</li>
-      <ToggleSwitch
-        :value="settings.longBreak"
-        @toggle-change="(val) => settingsStore.updateSettings('longBreak', val)"
-      />
-      <li>Long Break Time -> minutes</li>
-      <InputNumber
-        :class="settings.longBreak === false ? 'c-number--disabled' : ''"
-        :number="settings.longBreakTime"
-        :step="5"
-        @number-change="(val) => settingsStore.updateSettings('longBreakTime', val)"
-      />
-      <li>Sounds -> on/off</li>
-      <ToggleSwitch
-        :value="settings.sounds"
-        @toggle-change="(val) => settingsStore.updateSettings('sounds', val)"
-      />
-      <li>Sounds > -> lofi / rain / fire</li>
-      <ButtonGroup
-        :group="'sounds'"
-        :buttons="['rain', 'fire', 'white noise']"
-        @sound-change="(val) => settingsStore.updateSettings('soundType', val)"
-        :value="settings.soundType"
-      />
-      <li>Sound volume -> slider (range input)</li>
-      <VolumeSlider
-        :value="settings.volume"
-        @volume-change="(val) => settingsStore.updateSettings('volume', val)"
-      />
-      <li>Use system theme -> on/off</li>
-      <ToggleSwitch
-        :value="settings.useSystemTheme"
-        @toggle-change="(val) => settingsStore.updateSettings('useSystemTheme', val)"
-      />
-      <li>Dark mode -> on/off</li>
-      <ToggleSwitch
-        :class="settings.useSystemTheme === true ? 'c-toggle--disabled' : ''"
-        :value="settings.darkMode"
-        @toggle-change="(val) => settingsStore.updateSettings('darkMode', val)"
-      />
-      <li>About -> developer, Heroicons, app version</li>
-      <li>
-        <button class="c-settings__about" @click="modalShown = true">
-          <InfoIcon />
-          <span>About</span>
-        </button>
-      </li>
-    </ul>
+    <header class="c-settings__header">
+      <button class="c-settings__back" @click="emit('back', 'timer')">
+        <ChevronLIcon :color="`var(--text)`" />
+        <span>Back</span>
+      </button>
+      <h1 class="c-settings__title">
+        Settings
+      </h1>
+    </header>
+
+    <div class="c-settings__form">
+      <div class="c-settings__item">
+        <p class="c-settings__label">Focus Count:</p>
+        <div class="c-settings__input">
+          <InputNumber
+            :number="settings.focusCount"
+            :step="1"
+            @number-change="(val) => settingsStore.updateSettings('focusCount', val)"
+          />
+        </div>
+      </div>
+      <div class="c-settings__item">
+        <p class="c-settings__label">Focus Time:</p>
+        <div class="c-settings__input">
+          <InputNumber
+            :number="settings.focusTime"
+            :step="5"
+            @number-change="(val) => settingsStore.updateSettings('focusTime', val)"
+          />
+        </div>
+      </div>
+      <div class="c-settings__item">
+        <p class="c-settings__label">Short Break Time:</p>
+        <div class="c-settings__input">
+          <InputNumber
+            :number="settings.shortBreakTime"
+            :step="5"
+            @number-change="(val) => settingsStore.updateSettings('shortBreakTime', val)"
+          />
+        </div>
+      </div>
+      <div class="c-settings__item">
+        <p class="c-settings__label">Long Break:</p>
+        <div class="c-settings__input">
+          <ToggleSwitch
+            :value="settings.longBreak"
+            @toggle-change="(val) => settingsStore.updateSettings('longBreak', val)"
+          />
+        </div>
+      </div>
+      <div class="c-settings__item">
+        <p class="c-settings__label">Long Break Time:</p>
+        <div class="c-settings__input">
+          <InputNumber
+            :class="settings.longBreak === false ? 'c-number--disabled' : ''"
+            :number="settings.longBreakTime"
+            :step="5"
+            @number-change="(val) => settingsStore.updateSettings('longBreakTime', val)"
+          />
+        </div>
+      </div>
+      <div class="c-settings__item">
+        <p class="c-settings__label">Sounds:</p>
+        <div class="c-settings__input">
+          <ToggleSwitch
+            :value="settings.sounds"
+            @toggle-change="(val) => settingsStore.updateSettings('sounds', val)"
+          />
+        </div>
+      </div>
+      <div class="c-settings__item">
+        <p class="c-settings__label">Sounds Type:</p>
+        <div class="c-settings__input c-settings__input--group">
+          <ButtonGroup
+            :group="'sounds'"
+            :buttons="['rain', 'fire', 'white noise']"
+            @sound-change="(val) => settingsStore.updateSettings('soundType', val)"
+            :value="settings.soundType"
+          />
+        </div>
+      </div>
+      <div class="c-settings__item">
+        <p class="c-settings__label">Sounds Volume:</p>
+        <div class="c-settings__input">
+          <VolumeSlider
+            :value="settings.volume"
+            @volume-change="(val) => settingsStore.updateSettings('volume', val)"
+          />
+        </div>
+      </div>
+      <div class="c-settings__item">
+        <p class="c-settings__label">Use System Theme:</p>
+        <div class="c-settings__input">
+          <ToggleSwitch
+            :value="settings.useSystemTheme"
+            @toggle-change="(val) => settingsStore.updateSettings('useSystemTheme', val)"
+          />
+        </div>
+      </div>
+      <div class="c-settings__item">
+        <p class="c-settings__label">Dark Mode:</p>
+        <div class="c-settings__input">
+          <ToggleSwitch
+            :class="settings.useSystemTheme === true ? 'c-toggle--disabled' : ''"
+            :value="settings.darkMode"
+            @toggle-change="(val) => settingsStore.updateSettings('darkMode', val)"
+          />
+        </div>
+      </div>
+      <div class="c-settings__item">
+        <p class="c-settings__label">About:</p>
+        <div class="c-settings__input">
+          <button class="c-settings__about" @click="modalShown = true">
+            <InfoIcon />
+            <span>About</span>
+          </button>
+        </div>
+      </div>
+    </div>
   </section>
 
   <div class="c-modal" :class="{ 'c-modal--show' : modalShown }">
@@ -90,6 +138,7 @@ import ToggleSwitch from './form/ToggleSwitch.vue'
 import VolumeSlider from './form/VolumeSlider.vue'
 import InfoIcon from './icons/InfoIcon.vue'
 import CloseIcon from './icons/CloseIcon.vue'
+import ChevronLIcon from './icons/ChevronLIcon.vue'
 
 const emit = defineEmits(['back']);
 
@@ -107,6 +156,51 @@ onBeforeMount(() => {
 </script>
 
 <style lang="scss">
+.c-settings__header {
+  display: flex;
+  gap: 48px;
+  align-items: flex-end;
+  margin-bottom: 16px;
+}
+
+.c-settings__back {
+  cursor: pointer;
+  display: flex;
+  border: 0;
+  padding: 0;
+  gap: 4px;
+}
+
+.c-settings__title {
+  font-size: 28px;
+}
+
+.c-settings__form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.c-settings__item {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  align-items: center;
+}
+
+.c-settings__label {
+  text-transform: uppercase;
+  font-size: 14px;
+  letter-spacing: 2px;
+}
+
+.c-settings__input {
+  max-width: 120px;
+}
+
+.c-settings__input--group {
+  max-width: 300px;
+}
+
 .c-settings__about {
   cursor: pointer;
 }

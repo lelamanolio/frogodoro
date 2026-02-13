@@ -43,6 +43,8 @@ onBeforeMount(() => {
   flex-grow: 1;
   padding-bottom: 80px;
   padding-top: 32px;
+  padding-left: 32px;
+  padding-right: 32px;
 }
 
 .c-icon {
