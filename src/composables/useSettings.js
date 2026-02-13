@@ -9,7 +9,7 @@ const settings = ref({
   longBreak: true,
   longBreakTime: 15,
   sounds: true,
-  soundType: 'lofi',
+  soundType: 'rain',
   volume: 40,
   useSystemTheme: true,
   darkMode: false,

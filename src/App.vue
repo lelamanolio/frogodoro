@@ -46,4 +46,12 @@ onBeforeMount(() => {
   flex-grow: 1;
   padding-bottom: 80px;
 }
+
+.c-icon {
+  transition: 0.3s ease color;
+
+  &:hover {
+    color: var(--primary-color);
+  }
+}
 </style>
