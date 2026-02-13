@@ -1,16 +1,17 @@
 <template>
   <section class="c-timer">
-    <!-- minutes  -->
-    <!-- focus count -->
+
+    <p>{{ formatted }}</p>
+
     <ul class="c-timer__dots">
-      <template v-for="focus in settings.focusCount">
-        <li class="c-timer__focus"></li>
+      <template v-for="(focus, i) in settings.focusCount">
+        <li class="c-timer__focus">
+          <svg v-if="i < focusDoneCount" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 12.75 6 6 9-13.5" />
+          </svg>
+        </li>
       </template>
     </ul>
-
-    {{ formatted }}
-
-    Cycle: {{ focusDoneCount }}/{{ settings.focusCount }}
 
     <div class="c-timer__image">
       <img v-if="currentMode === 'focus'" src="../assets/focus_image.png" />
@@ -18,7 +19,7 @@
     </div>
 
     <ul class="c-timer__list">
-      <li class="c-timer__media" v-if="status === 'idle'" @click="start">
+      <li class="c-timer__media" @click="start">
         <PlayIcon :size="32" :color="`var(--text)`" />
       </li>
       <li class="c-timer__media" v-if="status === 'running'" @click="resume">
@@ -38,18 +39,16 @@
 </template>
 
 <script setup>
-import { ref, onBeforeMount, computed } from 'vue';
+import { onBeforeMount, computed } from 'vue';
 import { useSettings } from '../composables/useSettings.js';
-import { useTimer } from '@/composables/useTimer.js'
+import { useTimer } from '../composables/useTimer.js';
 import PlayIcon from './icons/PlayIcon.vue';
 import PauseIcon from './icons/PauseIcon.vue';
 import ResetIcon from './icons/ResetIcon.vue';
 import SkipIcon from './icons/SkipIcon.vue';
 
 const settingsStore = useSettings();
-
-const currentMode = ref('focus');
-const currentStatus = ref('idle');
+const { formatted, currentMode, start, pause, resume, reset, skip, focusDoneCount } = useTimer();
 
 const settings = computed(() => {
   return settingsStore.settings.value;
@@ -58,21 +57,6 @@ const settings = computed(() => {
 onBeforeMount(() => {
   settingsStore.loadSettings()
 });
-
-const {
-  mode,
-  status,
-  formatted,
-  focusDoneCount,
-  start,
-  pause,
-  resume,
-  reset,
-  skip,
-} = useTimer()
-
-// (optional) if long break is disabled, show a nicer cycle label
-const cycleLabel = computed(() => `${focusDoneCount.value}/${settings.value.focusCount}`)
 </script>
 
 <style lang="scss">
@@ -85,10 +69,11 @@ const cycleLabel = computed(() => `${focusDoneCount.value}/${settings.value.focu
 }
 
 .c-timer__focus {
-  width: 20px;
-  height: 20px;
+  width: 28px;
+  height: 28px;
   border-radius: 100%;
   border: 2px solid var(--text);
+  padding: 4px;
 }
 
 .c-timer__image {
