@@ -4,7 +4,7 @@
 
     <SettingsView v-if="currentView === 'settings'" @back="updateView" />
 
-    <Menu :view="currentView" @menu-click="updateView" />
+    <Menu :view="currentView" @menu-click="updateView" v-if="currentView === 'timer'" />
   </main>
 </template>
 
