@@ -1,5 +1,5 @@
 <template>
-  <main class="c-main" :class="{ 'is-dark' : settings.darkMode === true && settings.useSystemTheme === false, 'is-light' : settings.darkMode === false && settings.useSystemTheme === false }">
+  <main class="c-main" :class="bodyThemeClass">
     <TimerView v-if="currentView === 'timer'"/>
 
     <SettingsView v-if="currentView === 'settings'" @back="updateView" />
@@ -9,7 +9,7 @@
 </template>
 
 <script setup>
-import { ref, onBeforeMount, computed } from 'vue';
+import { ref, onBeforeMount, onMounted, computed, watch } from 'vue';
 import { useSettings } from './composables/useSettings.js'
 import Menu from '@/components/Menu.vue';
 import TimerView from './components/TimerView.vue';
@@ -21,6 +21,19 @@ const settings = computed(() => {
   return settingsStore.settings.value
 });
 
+const bodyThemeClass = computed(() => ({
+  'is-dark': settings.value.darkMode === true && settings.value.useSystemTheme === false,
+  'is-light': settings.value.darkMode === false && settings.value.useSystemTheme === false
+}));
+
+function applyBodyTheme() {
+  document.body.classList.remove('is-dark', 'is-light');
+  if (bodyThemeClass.value['is-dark']) document.body.classList.add('is-dark');
+  if (bodyThemeClass.value['is-light']) document.body.classList.add('is-light');
+}
+
+watch(settings, applyBodyTheme, { deep: true });
+
 const currentView = ref('timer');
 
 const updateView = (view) => {
@@ -29,6 +42,10 @@ const updateView = (view) => {
 
 onBeforeMount(() => {
   settingsStore.loadSettings()
+});
+
+onMounted(() => {
+  applyBodyTheme();
 });
 </script>
 
