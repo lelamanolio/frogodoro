@@ -1,5 +1,5 @@
 <template>
-  <main class="c-main" :class="bodyThemeClass">
+  <main class="c-main">
     <TimerView v-if="currentView === 'timer'"/>
 
     <SettingsView v-if="currentView === 'settings'" @back="updateView" />
