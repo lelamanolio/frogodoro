@@ -116,6 +116,34 @@
 
     <div class="c-settings__settings">
       <div class="c-settings__group">
+        <h2 class="c-settings__group-title">Reminders</h2>
+
+        <div class="c-settings__items">
+          <div class="c-settings__item">
+            <p class="c-settings__label">Reminders:</p>
+            <div class="c-settings__input">
+              <ToggleSwitch
+                :value="settings.reminders"
+                @toggle-change="(val) => settingsStore.updateSettings('reminders', val)"
+              />
+            </div>
+          </div>
+          <div class="c-settings__item">
+            <p class="c-settings__label">Reminder Interval:</p>
+            <div class="c-settings__input">
+              <InputNumber
+                :number="settings.remindersTime"
+                :step="5"
+                @number-change="(val) => settingsStore.updateSettings('remindersTime', val)"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="c-settings__settings">
+      <div class="c-settings__group">
         <h2 class="c-settings__group-title">System</h2>
 
         <div class="c-settings__items">
