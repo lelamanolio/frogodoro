@@ -66,19 +66,6 @@ export function useTimer() {
     }
   }
 
-  const resume = () => {
-    if (status.value === 'paused') {
-      status.value = 'running'
-      intervalId = setInterval(() => {
-        if (timeRemaining.value > 0) {
-          timeRemaining.value--
-        } else {
-          completeSession()
-        }
-      }, 1000)
-    }
-  }
-
   const reset = () => {
     if (intervalId) {
       clearInterval(intervalId)
@@ -150,7 +137,6 @@ export function useTimer() {
     formatted,
     start,
     pause,
-    resume,
     reset,
     skip,
   }

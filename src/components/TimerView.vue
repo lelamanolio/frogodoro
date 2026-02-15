@@ -14,13 +14,10 @@
     </ul>
 
     <ul class="c-timer__list">
-      <li class="c-timer__media" @click="start">
+      <li class="c-timer__media" v-if="status !== 'running'" @click="start">
         <PlayIcon :size="32" :color="`var(--text)`" />
       </li>
-      <li class="c-timer__media" v-if="status === 'running'" @click="resume">
-        <PlayIcon :size="32" :color="`var(--text)`" />
-      </li>
-      <li class="c-timer__media" @click="pause">
+      <li class="c-timer__media" v-if="status === 'running'" @click="pause">
         <PauseIcon :size="32" :color="`var(--text)`" />
       </li>
       <li class="c-timer__media" @click="reset">
@@ -42,13 +39,15 @@
 import { onBeforeMount, computed } from 'vue';
 import { useSettings } from '../composables/useSettings.js';
 import { useTimer } from '../composables/useTimer.js';
+import { useAmbientSound } from '../composables/useAmbientSound.js';
 import PlayIcon from './icons/PlayIcon.vue';
 import PauseIcon from './icons/PauseIcon.vue';
 import ResetIcon from './icons/ResetIcon.vue';
 import SkipIcon from './icons/SkipIcon.vue';
 
 const settingsStore = useSettings();
-const { formatted, currentMode, start, pause, resume, reset, skip, focusDoneCount } = useTimer();
+const { formatted, currentMode, status, start, pause, reset, skip, focusDoneCount } = useTimer();
+useAmbientSound(status, currentMode);
 
 const settings = computed(() => {
   return settingsStore.settings.value;

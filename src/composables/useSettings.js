@@ -9,13 +9,14 @@ const settings = ref({
   longBreak: true,
   longBreakTime: 15,
   sounds: true,
+  soundOnBreak: true,
   soundType: 'rain',
   volume: 40,
   useSystemTheme: true,
   darkMode: false,
-});
+})
 
-function loadSettings () {
+function loadSettings() {
   try {
     const raw = localStorage.getItem(storageKey)
 
@@ -32,16 +33,15 @@ const setCustomSettings = () => {
 }
 
 function updateSettings(key, value) {
-  settings.value[key] = value;
+  settings.value[key] = value
 
-  setCustomSettings();
+  setCustomSettings()
 }
-
 
 export function useSettings() {
   return {
     settings,
     loadSettings,
-    updateSettings
+    updateSettings,
   }
 }

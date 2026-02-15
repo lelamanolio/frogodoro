@@ -82,6 +82,15 @@
             </div>
           </div>
           <div class="c-settings__item">
+            <p class="c-settings__label">Sounds On Break:</p>
+            <div class="c-settings__input">
+              <ToggleSwitch
+                :value="settings.soundOnBreak"
+                @toggle-change="(val) => settingsStore.updateSettings('soundOnBreak', val)"
+              />
+            </div>
+          </div>
+          <div class="c-settings__item">
             <p class="c-settings__label">Ambient Sound:</p>
             <div class="c-settings__input c-settings__input--max">
               <ButtonGroup
