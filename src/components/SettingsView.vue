@@ -132,6 +132,7 @@
             <p class="c-settings__label">Reminder Interval:</p>
             <div class="c-settings__input">
               <InputNumber
+                :class="settings.reminders === false ? 'c-number--disabled' : ''"
                 :number="settings.remindersTime"
                 :step="5"
                 @number-change="(val) => settingsStore.updateSettings('remindersTime', val)"

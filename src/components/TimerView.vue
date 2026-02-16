@@ -40,6 +40,7 @@ import { onBeforeMount, computed } from 'vue';
 import { useSettings } from '../composables/useSettings.js';
 import { useTimer } from '../composables/useTimer.js';
 import { useAmbientSound } from '../composables/useAmbientSound.js';
+import { useReminder } from '../composables/useReminder.js';
 import PlayIcon from './icons/PlayIcon.vue';
 import PauseIcon from './icons/PauseIcon.vue';
 import ResetIcon from './icons/ResetIcon.vue';
@@ -48,6 +49,7 @@ import SkipIcon from './icons/SkipIcon.vue';
 const settingsStore = useSettings();
 const { formatted, currentMode, status, start, pause, reset, skip, focusDoneCount } = useTimer();
 useAmbientSound(status, currentMode);
+useReminder(status);
 
 const settings = computed(() => {
   return settingsStore.settings.value;

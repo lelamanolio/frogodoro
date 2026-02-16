@@ -11,7 +11,7 @@ const settings = ref({
   sounds: true,
   soundOnBreak: true,
   soundType: 'rain',
-  volume: 40,
+  volume: 50,
   reminders: true,
   remindersTime: 10,
   useSystemTheme: true,
