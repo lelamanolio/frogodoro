@@ -186,12 +186,13 @@
     <button class="c-modal__close" @click="modalShown = false">
       <CloseIcon :color="`var(--text)`" />
     </button>
-    <p>Developed by: <a href="https://lela.codes/">lela</a></p>
-    <p>Icons by: <a href="https://heroicons.com/outline">Heroicons</a></p>
+    <p>Developed by: <a href="https://lela.codes/" target="_blank">lela</a></p>
+    <p>Icons by: <a href="https://heroicons.com/outline" target="_blank">Heroicons</a></p>
     <p>
-      Sounds by: <a href="https://freesound.org/people/_lynks/sounds/595717/">rain</a>,
-      <a href="https://freesound.org/people/Nox_Sound/sounds/472591/">fire</a> &
-      <a href="https://freesound.org/people/DJT4NN3R/sounds/347576/">white noise</a>
+      Sounds by: <a href="https://freesound.org/people/_lynks/sounds/595717/" target="_blank">rain</a>,
+      <a href="https://freesound.org/people/Nox_Sound/sounds/472591/" target="_blank">fire</a>,
+      <a href="https://freesound.org/people/DJT4NN3R/sounds/347576/" target="_blank">white noise</a> &
+      <a href="https://freesound.org/people/monte32/sounds/361427/" target="_blank">reminder chime</a>
     </p>
   </div>
 </template>
