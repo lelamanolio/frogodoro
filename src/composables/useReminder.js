@@ -1,16 +1,8 @@
 import { watch, onUnmounted } from 'vue'
 import { useSettings } from './useSettings.js'
 
-const CHIMES_PATH = '/sounds/chimes.mp3'
+const chimesPath = '/sounds/chimes.mp3'
 
-/**
- * Composable per il reminder (es. bere acqua).
- * Quando il timer è in esecuzione (focus o break) e reminders è attivo,
- * fa suonare i chimes ogni remindersTime minuti.
- * Usa lo stesso volume dei suoni ambientali.
- *
- * @param {import('vue').Ref<string>} statusRef - status del timer: 'idle' | 'running' | 'paused'
- */
 export function useReminder(statusRef) {
   const settingsStore = useSettings()
   let timeoutId = null
@@ -23,7 +15,7 @@ export function useReminder(statusRef) {
 
     try {
       if (!audio) {
-        audio = new Audio(CHIMES_PATH)
+        audio = new Audio(chimesPath)
       }
       const vol = settings.volume ?? 40
       audio.volume = Math.min(1, Math.max(0, vol / 100))
@@ -58,11 +50,9 @@ export function useReminder(statusRef) {
 
     const minutesMs = (settings.remindersTime || 10) * 60 * 1000
 
-    // Primo reminder dopo remindersTime minuti
     timeoutId = setTimeout(() => {
       timeoutId = null
       playChimes()
-      // Poi ogni remindersTime minuti
       intervalId = setInterval(playChimes, minutesMs)
     }, minutesMs)
   }
@@ -74,7 +64,7 @@ export function useReminder(statusRef) {
       () => settingsStore.settings.value.remindersTime,
     ],
     scheduleReminders,
-    { immediate: true }
+    { immediate: true },
   )
 
   onUnmounted(() => {

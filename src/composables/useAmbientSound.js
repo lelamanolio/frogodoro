@@ -1,32 +1,18 @@
 import { watch, onUnmounted } from 'vue'
 import { useSettings } from './useSettings.js'
 
-const SOUND_FILES = {
+const soundFiles = {
   rain: 'rain.mp3',
   fire: 'fire.mp3',
   'white noise': 'white-noise.mp3',
 }
 
-/**
- * Restituisce il path del file audio per un soundType.
- * I file vanno messi in public/sounds/ (es. public/sounds/rain.mp3).
- */
 function getSoundPath(soundType) {
-  const filename = SOUND_FILES[soundType]
+  const filename = soundFiles[soundType]
   if (!filename) return null
   return `/sounds/${filename}`
 }
 
-/**
- * Composable per l'audio ambientale del timer.
- * Suona quando:
- * - settings.sounds è true
- * - il timer è in esecuzione (running); in pausa l’audio si ferma
- * - siamo in focus OPPURE settings.soundOnBreak è true (suono anche in break)
- *
- * @param {import('vue').Ref<string>} statusRef - status del timer: 'idle' | 'running' | 'paused'
- * @param {import('vue').Ref<string>} currentModeRef - modalità: 'focus' | 'break'
- */
 export function useAmbientSound(statusRef, currentModeRef) {
   const settingsStore = useSettings()
   let audio = null
@@ -98,7 +84,7 @@ export function useAmbientSound(statusRef, currentModeRef) {
       () => settingsStore.settings.value.volume,
     ],
     tick,
-    { immediate: true, deep: true }
+    { immediate: true, deep: true },
   )
 
   onUnmounted(() => {

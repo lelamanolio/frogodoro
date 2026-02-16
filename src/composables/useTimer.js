@@ -29,19 +29,16 @@ export function useTimer() {
   })
 
   const start = () => {
-    // Se è idle, inizializza il timer
     if (status.value === 'idle') {
       initializeTimer()
     }
 
-    // Se è già running, non fare nulla
     if (status.value === 'running') {
       return
     }
 
     status.value = 'running'
 
-    // Pulisci eventuali intervalli precedenti
     if (intervalId) {
       clearInterval(intervalId)
     }
@@ -50,7 +47,6 @@ export function useTimer() {
       if (timeRemaining.value > 0) {
         timeRemaining.value--
       } else {
-        // Timer completato
         completeSession()
       }
     }, 1000)
