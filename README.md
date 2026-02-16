@@ -1,44 +1,82 @@
-# frogodoro
+# 🐸 Frogodoro
 
-This template should help get you started developing with Vue 3 in Vite.
+A free, minimal Pomodoro timer app with ambient sounds and reminders. Built with Vue and Electron.
 
-## Recommended IDE Setup
+---
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+## What is Frogodoro?
 
-## Recommended Browser Setup
+Frogodoro is a distraction-free Pomodoro timer designed to help you stay focused and take care of yourself during long work sessions. It sits quietly in the background with ambient sounds, tracks your focus sessions, and reminds you to drink water — no subscriptions, no accounts, no cloud.
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
+---
 
-## Customize configuration
+## Settings
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+### Timer
 
-## Project Setup
+| Setting | Description |
+|---|---|
+| **Sessions** | Number of focus sessions before a long break kicks in |
+| **Focus Time** | Duration of each focus session, in minutes |
+| **Short Break Time** | Duration of the short break between sessions, in minutes |
+| **Long Break** | Enable or disable the long break at the end of a full cycle |
+| **Long Break Time** | Duration of the long break, in minutes |
 
-```sh
-npm install
+### Sounds
+
+| Setting | Description |
+|---|---|
+| **Sounds** | Enable or disable ambient sounds entirely |
+| **Sounds On Break** | Whether ambient sounds keep playing during breaks. If off, sounds stop when a break starts and resume when focus resumes |
+| **Ambient Sound** | Choose between Rain, Fire, or White Noise |
+| **Sounds Volume** | Volume level for ambient sounds |
+
+### Reminders
+
+| Setting | Description |
+|---|---|
+| **Reminders** | Enable periodic reminders while the timer is running — useful for remembering to drink water, stretch, or just take a breath |
+| **Reminder Interval** | How often the reminder plays, in minutes. Runs independently from the Pomodoro cycle, so it's not tied to sessions or breaks |
+
+### System
+
+| Setting | Description |
+|---|---|
+| **Follow System Theme** | Automatically match your OS light/dark mode |
+| **Dark Mode** | Manually toggle dark mode, when Follow System Theme is off |
+
+---
+
+## Getting Started
+
+### Dev mode
+
+```bash
+npm run electron-dev
 ```
 
-### Compile and Hot-Reload for Development
+### Build for all platforms
 
-```sh
-npm run dev
+```bash
+npm run electron-build:all
 ```
 
-### Compile and Minify for Production
+This generates:
+- `.dmg` for macOS
+- `.exe` for Windows
+- `.AppImage` and `.deb` for Linux
 
-```sh
-npm run build
-```
+---
 
-### Lint with [ESLint](https://eslint.org/)
+## Tech Stack
 
-```sh
-npm run lint
-```
+- [Vue 3](https://vuejs.org/)
+- [Electron](https://www.electronjs.org/)
+- [electron-vite](https://electron-vite.org/)
+- [electron-builder](https://www.electron.build/)
+
+---
+
+## License
+
+Free to use. Not for sale.
