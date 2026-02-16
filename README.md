@@ -1,12 +1,18 @@
 # 🐸 Frogodoro
 
-A free, minimal Pomodoro timer app with ambient sounds and reminders. Built with Vue and Electron.
+A free, minimal Pomodoro timer app with ambient sounds and hydration reminders. Built with Vue and Electron.
 
 ---
 
 ## What is Frogodoro?
 
 Frogodoro is a distraction-free Pomodoro timer designed to help you stay focused and take care of yourself during long work sessions. It sits quietly in the background with ambient sounds, tracks your focus sessions, and reminds you to drink water — no subscriptions, no accounts, no cloud.
+
+---
+
+## Download
+
+[⬇️ Download the latest release](https://github.com/lelamanolio/frogodoro/releases)
 
 ---
 
@@ -76,7 +82,3 @@ This generates:
 - [electron-builder](https://www.electron.build/)
 
 ---
-
-## License
-
-Free to use. Not for sale.
