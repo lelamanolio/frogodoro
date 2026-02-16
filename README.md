@@ -1,6 +1,6 @@
 # 🐸 Frogodoro
 
-A free, minimal Pomodoro timer app with ambient sounds and hydration reminders. Built with Vue and Electron.
+A free, minimal Pomodoro timer app with ambient sounds and reminders. Built with Vue and Electron.
 
 ---
 
