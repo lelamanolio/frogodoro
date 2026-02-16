@@ -1,0 +1,87 @@
+# Configurazione electron-builder per il packaging dell'app
+# Documentazione: https://www.electron.build/
+
+appId: com.frogodoro.app
+productName: Frogodoro
+copyright: Copyright © 2026
+
+# Directory di output
+directories:
+  buildResources: build
+  output: dist
+
+# File da includere/escludere nel bundle
+files:
+  - '!**/.vscode/*'
+  - '!src/*'
+  - '!electron/**/*.js'
+  - '!electron.vite.config.js'
+  - '!{.eslintignore,.eslintrc.cjs,.prettierignore,.prettierrc.yaml,CHANGELOG.md,README.md}'
+  - '!{.env,.env.*,.npmrc,pnpm-lock.yaml}'
+  - '!{tsconfig.json,tsconfig.node.json,tsconfig.web.json}'
+  - 'out/**/*'
+  - 'resources/**/*'
+  - 'package.json'
+
+# File da non includere nell'archivio ASAR (binari, moduli nativi, ecc.)
+asarUnpack:
+  - resources/**
+
+# Configurazione Windows
+win:
+  executableName: frogodoro
+  target:
+    - target: nsis
+      arch:
+        - x64
+  icon: resources/icon.ico
+
+nsis:
+  artifactName: ${name}-${version}-setup.${ext}
+  shortcutName: ${productName}
+  uninstallDisplayName: ${productName}
+  createDesktopShortcut: always
+  oneClick: false
+  allowToChangeInstallationDirectory: true
+
+# Configurazione macOS
+mac:
+  category: public.app-category.productivity
+  target:
+    - target: dmg
+      arch:
+        - x64
+        - arm64
+  icon: resources/icon.icns
+  entitlementsInherit: null
+  extendInfo:
+    - NSHighResolutionCapable: true
+
+dmg:
+  artifactName: ${name}-${version}.${ext}
+  title: ${productName} ${version}
+
+# Configurazione Linux
+linux:
+  target:
+    - AppImage
+    - deb
+  category: Utility
+  # maintainer: opzionale, usato nei pacchetti .deb (es. "Mario Rossi <mario@example.com>")
+  maintainer: Frogodoro
+  icon: resources/icon.png
+
+appImage:
+  artifactName: ${name}-${version}.${ext}
+
+deb:
+  artifactName: ${name}-${version}.${ext}
+
+# Disabilita rebuild npm (non necessario se non usi moduli nativi)
+npmRebuild: false
+
+# Configurazione per auto-update (opzionale)
+# publish:
+#   provider: github
+#   owner: your-username
+#   repo: frogodoro
