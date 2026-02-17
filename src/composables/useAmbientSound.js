@@ -10,7 +10,8 @@ const soundFiles = {
 function getSoundPath(soundType) {
   const filename = soundFiles[soundType]
   if (!filename) return null
-  return `/sounds/${filename}`
+  const base = typeof import.meta.env?.BASE_URL === 'string' ? import.meta.env.BASE_URL : '/'
+  return `${base}sounds/${filename}`
 }
 
 export function useAmbientSound(statusRef, currentModeRef) {

@@ -32,6 +32,7 @@ export default defineConfig({
     },
   },
   renderer: {
+    base: './', // Necessario per far funzionare gli asset (es. suoni) con loadFile() in produzione (file://)
     root: '.',
     resolve: {
       alias: {

@@ -1,7 +1,8 @@
 import { watch, onUnmounted } from 'vue'
 import { useSettings } from './useSettings.js'
 
-const chimesPath = '/sounds/chimes.mp3'
+const base = typeof import.meta.env?.BASE_URL === 'string' ? import.meta.env.BASE_URL : '/'
+const chimesPath = `${base}sounds/chimes.mp3`
 
 export function useReminder(statusRef) {
   const settingsStore = useSettings()
