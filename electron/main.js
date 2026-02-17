@@ -42,9 +42,9 @@ function createWindow() {
 
   if (iconPath) {
     windowOptions.icon = iconPath
-    console.log('Icona caricata da:', iconPath)
+    console.log('Icon loaded from:', iconPath)
   } else {
-    console.warn('Icona non trovata, usando icona di default')
+    console.warn('Icon not found, using default icon')
   }
 
   mainWindow = new BrowserWindow(windowOptions)
@@ -79,7 +79,7 @@ function createMenu() {
       label: 'File',
       submenu: [
         {
-          label: 'Esci',
+          label: 'Quit',
           accelerator: process.platform === 'darwin' ? 'Cmd+Q' : 'Ctrl+Q',
           click: () => {
             app.quit()
@@ -88,53 +88,53 @@ function createMenu() {
       ],
     },
     {
-      label: 'Modifica',
+      label: 'Edit',
       submenu: [
-        { role: 'undo', label: 'Annulla' },
-        { role: 'redo', label: 'Ripeti' },
+        { role: 'undo', label: 'Undo' },
+        { role: 'redo', label: 'Redo' },
         { type: 'separator' },
-        { role: 'cut', label: 'Taglia' },
-        { role: 'copy', label: 'Copia' },
-        { role: 'paste', label: 'Incolla' },
+        { role: 'cut', label: 'Cut' },
+        { role: 'copy', label: 'Copy' },
+        { role: 'paste', label: 'Paste' },
       ],
     },
     {
-      label: 'Visualizza',
+      label: 'View',
       submenu: [
-        { role: 'reload', label: 'Ricarica' },
-        { role: 'forceReload', label: 'Forza ricarica' },
-        { role: 'toggleDevTools', label: 'Strumenti sviluppatore' },
+        { role: 'reload', label: 'Reload' },
+        { role: 'forceReload', label: 'Force Reload' },
+        { role: 'toggleDevTools', label: 'Developer Tools' },
         { type: 'separator' },
-        { role: 'resetZoom', label: 'Zoom normale' },
-        { role: 'zoomIn', label: 'Ingrandisci' },
-        { role: 'zoomOut', label: 'Riduci' },
+        { role: 'resetZoom', label: 'Actual Size' },
+        { role: 'zoomIn', label: 'Zoom In' },
+        { role: 'zoomOut', label: 'Zoom Out' },
         { type: 'separator' },
-        { role: 'togglefullscreen', label: 'Schermo intero' },
+        { role: 'togglefullscreen', label: 'Toggle Full Screen' },
       ],
     },
     {
-      label: 'Finestra',
+      label: 'Window',
       submenu: [
-        { role: 'minimize', label: 'Riduci a icona' },
-        { role: 'close', label: 'Chiudi' },
+        { role: 'minimize', label: 'Minimize' },
+        { role: 'close', label: 'Close' },
       ],
     },
   ]
 
-  // Menu specifico per macOS
+  // macOS-specific menu
   if (process.platform === 'darwin') {
     template.unshift({
       label: app.getName(),
       submenu: [
-        { role: 'about', label: 'Informazioni su ' + app.getName() },
+        { role: 'about', label: 'About ' + app.getName() },
         { type: 'separator' },
-        { role: 'services', label: 'Servizi' },
+        { role: 'services', label: 'Services' },
         { type: 'separator' },
-        { role: 'hide', label: 'Nascondi ' + app.getName() },
-        { role: 'hideOthers', label: 'Nascondi altre' },
-        { role: 'unhide', label: 'Mostra tutte' },
+        { role: 'hide', label: 'Hide ' + app.getName() },
+        { role: 'hideOthers', label: 'Hide Others' },
+        { role: 'unhide', label: 'Show All' },
         { type: 'separator' },
-        { role: 'quit', label: 'Esci da ' + app.getName() },
+        { role: 'quit', label: 'Quit ' + app.getName() },
       ],
     })
   }
@@ -146,7 +146,7 @@ function createMenu() {
 app.whenReady().then(() => {
   if (process.platform === 'darwin') {
     const iconPath = getIconPath()
-    console.log('Tentativo di caricare icona da:', iconPath)
+    console.log('Attempting to load icon from:', iconPath)
 
     if (iconPath) {
       try {
@@ -154,25 +154,25 @@ app.whenReady().then(() => {
 
         if (icon && !icon.isEmpty()) {
           app.dock.setIcon(icon)
-          console.log('✓ Icona dock impostata correttamente da:', iconPath)
-          console.log('  Dimensioni icona:', icon.getSize())
+          console.log('✓ Dock icon set successfully from:', iconPath)
+          console.log('  Icon size:', icon.getSize())
         } else {
-          console.warn('⚠ Icona vuota o non valida')
+          console.warn('⚠ Icon empty or invalid')
           const pngPath = iconPath.replace('.icns', '.png')
           if (existsSync(pngPath)) {
             const pngIcon = nativeImage.createFromPath(pngPath)
             if (!pngIcon.isEmpty()) {
               app.dock.setIcon(pngIcon)
-              console.log('✓ Usata icona PNG come fallback')
+              console.log('✓ Using PNG icon as fallback')
             }
           }
         }
       } catch (error) {
-        console.error("✗ Errore nel caricare l'icona della dock:", error.message)
+        console.error('✗ Error loading dock icon:', error.message)
         console.error('  Stack:', error.stack)
       }
     } else {
-      console.warn('⚠ Percorso icona non trovato per la dock')
+      console.warn('⚠ Icon path not found for dock')
       console.warn('  __dirname:', __dirname)
     }
   }

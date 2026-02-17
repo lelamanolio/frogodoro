@@ -1,11 +1,10 @@
-// Preload script per Electron
-// Questo script viene eseguito prima che il contenuto della pagina venga caricato
-// e può esporre API sicure al renderer process
+// Electron preload script
+// Runs before the page loads and can expose safe APIs to the renderer process
 
 import { contextBridge } from 'electron'
 
-// Esponi API sicure al renderer process se necessario
-// Esempio:
+// Expose safe APIs to the renderer process if needed
+// Example:
 // contextBridge.exposeInMainWorld('electronAPI', {
-//   // API esposte qui
+//   // APIs exposed here
 // })
